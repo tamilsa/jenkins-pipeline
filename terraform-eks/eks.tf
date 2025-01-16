@@ -4,8 +4,8 @@ module "eks" {
     cluster_name = "eks-cluster"
     cluster_version = "1.30"
     cluster_endpoint_public_access  = true
-    vpc_id = module.my-vpc.vpc_id
-    subnet_ids = module.my-vpc.private_subnets
+    vpc_id = module.demo-vpc.vpc_id
+    subnet_ids = module.demo-vpc.private_subnets
     tags = {
         environment = "development"
         application = "myapp"
