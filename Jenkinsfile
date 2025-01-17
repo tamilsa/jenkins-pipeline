@@ -13,8 +13,8 @@ pipeline {
                 script {
                     dir('terraform-eks') {
                       //  # Jenkins will run these commands for us
-                       // sh "terraform init"
-                        sh "terraform destroy -auto-approve"
+                        sh "terraform init"
+                        sh "terraform apply -auto-approve"
                     }
                 }
             }
