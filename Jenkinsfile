@@ -9,19 +9,32 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION = "us-east-2"
     }
+ parameters {
+        // Dropdown for Terraform actions
+        choice(name: 'ACTION', choices: ['apply', 'destroy'], description: 'Choose the Terraform action to perform')
+    }
     stages {
-       // # Stage 1
-        stage("Create an EKS Cluster") {
+        stage("Terraform Init and Apply/Destroy") {
             steps {
                 script {
                     dir('terraform-eks') {
-                      //  # Jenkins will run these commands for us
+                        // Initialize Terraform
                         sh "terraform init"
-                        sh "terraform ${params.ACTION} -auto-approve"
+                        
+                        // Perform the action selected in the parameter
+                        if (params.ACTION == 'apply') {
+                            echo "Running terraform apply..."
+                            sh "terraform apply -auto-approve"
+                        } else if (params.ACTION == 'destroy') {
+                            echo "Running terraform destroy..."
+                            sh "terraform destroy -auto-approve"
+                        }
                     }
                 }
             }
         }
+    }
+}
       //  # Stage 2
 //#        stage("Deploy to EKS") {
 //#            steps {
@@ -37,6 +50,6 @@ pipeline {
 //#                }
 //#            }
 //#        }
-    }
+//    }
 
-}
+//}
