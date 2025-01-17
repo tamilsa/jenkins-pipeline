@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+        choice(name: 'ACTION', choices: ['apply', 'destroy'], description: 'Choose the Terraform action to perform')
+    }
     environment {
        // # Jenkins will use the credentials added earlier
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
@@ -14,7 +17,7 @@ pipeline {
                     dir('terraform-eks') {
                       //  # Jenkins will run these commands for us
                         sh "terraform init"
-                        sh "terraform apply -auto-approve"
+                        sh "terraform ${params.ACTION} -auto-approve"
                     }
                 }
             }
