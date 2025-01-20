@@ -29,7 +29,6 @@ resource "aws_security_group" "lb_sg" {
 resource "aws_lb" "classic_lb" {
   name               = "classic-lb"
   internal           = false
-  load_balancer_type = "classic"
   security_groups    = [aws_security_group.lb_sg.id]
   subnets            = [aws_subnet.lb_subnet.id]
 
