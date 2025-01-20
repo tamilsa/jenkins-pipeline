@@ -31,21 +31,4 @@ pipeline {
         }
     }
 }
-      //  # Stage 2
-//#        stage("Deploy to EKS") {
-//#            steps {
-//#                script {
-//#                    dir('kubernetes') {
-//#                        # Update packages inside the cluster
-//#                        sh "aws eks update-kubeconfig --name eks-cluster"
-//#                        # Deploy an application
-//#                        sh "kubectl apply -f nginx-deployment.yaml"
-//#                        # Deploy a service
-//#                        sh "kubectl apply -f nginx-service.yaml"
-//#                    }
-//#                }
-//#            }
-//#        }
-//    }
 
-//}
