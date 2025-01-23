@@ -15,8 +15,9 @@ pipeline {
                 script {
                     dir('terraform-eks') {
                         // Initialize Terraform
-                        sh "terraform init -reconfigure"
-                        
+                        sh "terraform init"
+                        echo "Running terraform validate..."
+                        sh "terraform validate"
                         // Perform the action selected in the parameter
                         if (params.ACTION == 'apply') {
                             echo "Running terraform apply..."
